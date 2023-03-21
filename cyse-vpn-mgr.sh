@@ -17,10 +17,10 @@ case $option_choice in
         echo "The format for each username will be student# which you can assign to students"
         read user_count
         for ((i=1; i<=$user_count; i++)); do
-            echo "Enter the name of the user (student) you want to create:"
-            read user_name
-            create_profile $user_name
+            echo "Starting Creation of User: student${i}"
+            create_profile "student${i}"
         done
+        exit
         ;;
     2)
         echo "Not Implemented! Try again in a future release"
@@ -66,5 +66,6 @@ create_profile () {
     done
     cd /etc/openvpn/server/easy-rsa/
     ./easyrsa --batch --days=3650 build-client-full "$client" nopass
+    new_client
     echo "[INFO] $client added. Configuration available in:" ~/"$client.ovpn"
 }
